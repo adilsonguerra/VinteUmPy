@@ -9,7 +9,7 @@ SCREEN_HEIGHT = 512
 BACKGROUND = pygame.image.load('./resources/background-verde.png')
 
 # frames por segundo
-SPEED = 20
+SPEED = 15
 
 #Criar a tela
 screen= pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
