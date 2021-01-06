@@ -8,14 +8,11 @@ SCREEN_WIDTH = 512#288
 SCREEN_HEIGHT = 512
 BACKGROUND = pygame.image.load('./resources/background-verde.png')
 
-# frames por segundo
-SPEED = 15
-
 #Criar a tela
 screen= pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 # Essa classe está herdando funcionalidades da classe pygame.sprite.Sprite
-class Bird(pygame.sprite.Sprite):
+class Carta(pygame.sprite.Sprite):
 	#Daunder init, construtor
 	def __init__(self):
 		#Chama o construtor da classe herdada
@@ -30,7 +27,6 @@ class Bird(pygame.sprite.Sprite):
 		# o .convert_alpha() faz com que a imagem não seja considerada um retangulo, despreza a parte transparente
 		self.image = pygame.image.load('./resources/as_copas.JPG').convert_alpha()
 		
-
 		# Cria uma variável que representa um retangulo em volta da imagem. É usado para posicionamento.
 		self.rect = self.image.get_rect()
 		#print(self.rect) # rect(0, 0, 58, 84) -> Esse retangulo começa na posição 0,0
@@ -47,13 +43,13 @@ class Bird(pygame.sprite.Sprite):
 
 
 # Cria um array de objetos
-bird_group = pygame.sprite.Group()
+carta_group = pygame.sprite.Group()
 
-# Cria um objeto da classe Bird()
-bird = Bird()
+# Cria um objeto da classe carta()
+carta = Carta()
 
 # Adiciona o objeto ao grupo
-bird_group.add(bird)
+carta_group.add(carta)
 
 # Cria um objeto tipo Clock e força um atraso no While
 #clock = pygame.time.Clock()
@@ -72,16 +68,16 @@ while True:
 
 		if event.type == pygame.MOUSEMOTION:
 
-			#print(bird.rect)
-			if event.buttons[0]==1 and event.pos[0] - bird.rect[0]>=0 and event.pos[0] - bird.rect[1]<=58 and event.pos[1] - bird.rect[1]>=0 and event.pos[1] - bird.rect[1]<=84:
+			#print(carta.rect)
+			if event.buttons[0]==1 and event.pos[0] - carta.rect[0]>=0 and event.pos[0] - carta.rect[1]<=58 and event.pos[1] - carta.rect[1]>=0 and event.pos[1] - carta.rect[1]<=84:
 
 				if event.rel[0] != 0:  # 'rel' is a tuple (x, y). 'rel[0]' is the x-value.
 					#print("You're moving the mouse to the right")
-					bird.rect[0] = bird.rect[0] + event.rel[0]
+					carta.rect[0] = carta.rect[0] + event.rel[0]
 
 				if event.rel[1] != 0:  # pygame start y=0 at the top of the display, so higher y-values are further down.
 					#print("You're moving the mouse down")
-					bird.rect[1] = bird.rect[1] + event.rel[1]
+					carta.rect[1] = carta.rect[1] + event.rel[1]
 		'''
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			if event.button == 1:
@@ -89,7 +85,7 @@ while True:
 				pass
 			if event.button == 3:
 				#print("You pressed the right mouse button")
-				bird.rect[1] += 3
+				carta.rect[1] += 3
 
 		if event.type == pygame.MOUSEBUTTONUP:
 			print("You released the mouse button")
@@ -98,10 +94,10 @@ while True:
 	screen.blit(BACKGROUND,(0,0))
 
 	# Atualiza os atributos de cada objeto do grupo
-	bird_group.update()
+	carta_group.update()
 
 	# Desenha na tela(screen) cada objeto do grupo
-	bird_group.draw(screen)
+	carta_group.draw(screen)
 
 	# Atualiza a tela
 	pygame.display.update()
