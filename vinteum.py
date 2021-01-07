@@ -4,9 +4,69 @@ from pygame.locals import *
 # Sempre tem que colocar logo no começo
 pygame.init()
 
+IMAGES_DIR = './resources/'
 SCREEN_WIDTH = 512#288
 SCREEN_HEIGHT = 512
-BACKGROUND = pygame.image.load('./resources/background-verde.png')
+BACKGROUND = pygame.image.load(IMAGES_DIR + 'background-verde.png')
+
+images_card= []
+images_card.append(pygame.image.load(IMAGES_DIR + 'verso_py.jpg'))
+#copas
+images_card.append(pygame.image.load(IMAGES_DIR + 'as_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dois_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'tres_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'quatro_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'cinco_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'seis_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'sete_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'oito_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'nove_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dez_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dama_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'valete_copas.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'rei_copas.jpg'))
+#espadas
+images_card.append(pygame.image.load(IMAGES_DIR + 'as_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dois_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'tres_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'quatro_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'cinco_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'seis_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'sete_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'oito_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'nove_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dez_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dama_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'valete_espada.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'rei_espada.jpg'))
+#ouros
+images_card.append(pygame.image.load(IMAGES_DIR + 'as_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dois_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'tres_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'quatro_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'cinco_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'seis_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'sete_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'oito_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'nove_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dez_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dama_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'valete_ouro.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'rei_ouro.jpg'))
+#paus
+images_card.append(pygame.image.load(IMAGES_DIR + 'as_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dois_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'tres_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'quatro_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'cinco_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'seis_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'sete_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'oito_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'nove_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dez_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'dama_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'valete_paus.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'rei_paus.jpg'))
 
 #Criar a tela
 screen= pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
@@ -49,86 +109,114 @@ class Carta(pygame.sprite.Sprite):
 		#Cada atualização, altera para a próxima imagem
 		self.image = self.images[self.current_image]
 
+class Baralho():
+	#Daunder init, construtor
+	def __init__(self):
+		self.monte=[]
+		for i in range(53):
+			self.monte.append(Carta(images_card[i], images_card[0],1,1,100+i,100+i))
+		
+baralho = Baralho()
 
 # Cria um array de objetos
 carta_group = pygame.sprite.Group()
 
-# Cria um objeto da classe carta()
-carta1 = Carta(pygame.image.load('./resources/as_copas.JPG'), pygame.image.load('./resources/verso_py.jpg'), 1,1,100, 100)
-carta2 = Carta(pygame.image.load('./resources/dois_copas.JPG'),pygame.image.load('./resources/verso_py.jpg'),2,2, 200, 200)
+cartas=[]
+cartas = baralho.monte
 
-# Adiciona o objeto ao grupo
-carta_group.add(carta1)
-carta_group.add(carta2)
+# Adiciona cada carta objeto ao grupo
+for i in range(len(cartas)):
+	carta_group.add(cartas[i])
 
-# Cria um objeto tipo Clock e força um atraso no While
-#clock = pygame.time.Clock()
+#Quantidade de cartas visíveis na mesa
+qty_cards=53
 
 while True:
-	#Define 20 Frames por segundo
-	#clock.tick(20)
-
 	# Aqui no "FOR" definimos os eventos
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:  # Close your program if the user wants to quit.
-			raise SystemExit
-	#		pygame.quit()
+			pygame.quit() # OU raise SystemExit		
 
 		#print(event)
-
 		if event.type == pygame.MOUSEMOTION:
+			
+			for i in range(qty_cards):
+				if event.buttons[0]==1 and \
+					event.pos[0] - cartas[i].rect[0]>=0 and \
+					event.pos[0] - cartas[i].rect[0]<=58 and \
+					event.pos[1] - cartas[i].rect[1]>=0 and \
+					event.pos[1] - cartas[i].rect[1]<=84:
 
-			#print(carta.rect)
-			if event.buttons[0]==1 and \
-				event.pos[0] - carta1.rect[0]>=0 and \
-				event.pos[0] - carta1.rect[0]<=58 and \
-				event.pos[1] - carta1.rect[1]>=0 and \
-				event.pos[1] - carta1.rect[1]<=84:
+					if event.rel[0] != 0:  # 'rel' is a tuple (x, y). 'rel[0]' is the x-value.
+						#print("You're moving the mouse to the right")
+						if cartas[i].rect[0] < SCREEN_WIDTH-58 and cartas[i].rect[0] > 0:
+							cartas[i].rect[0] +=  event.rel[0]
+						else:
+							if cartas[i].rect[0] <= 0 :
+								cartas[i].rect[0] = 2
+							else:
+								cartas[i].rect[0] = SCREEN_WIDTH-58-2
 
-				if event.rel[0] != 0:  # 'rel' is a tuple (x, y). 'rel[0]' is the x-value.
-					#print("You're moving the mouse to the right")
-					carta1.rect[0] +=  event.rel[0]
+					if event.rel[1] != 0:  # pygame start y=0 at the top of the display, so higher y-values are further down.
+						#print("You're moving the mouse down")
+						if cartas[i].rect[1] > 0 and cartas[i].rect[1] < SCREEN_HEIGHT-84:
+							cartas[i].rect[1] +=  event.rel[1]
+						else:
+							if cartas[i].rect[1] <= 0:
+								cartas[i].rect[1] = 2
+							else:
+								cartas[i].rect[1] = SCREEN_HEIGHT-84-2
 
-				if event.rel[1] != 0:  # pygame start y=0 at the top of the display, so higher y-values are further down.
-					#print("You're moving the mouse down")
-					carta1.rect[1] +=  event.rel[1]
+		#---------------------------------------------------------------
 
-			#---------------------------------------------------------------
-
-			if event.buttons[0]==1 and \
-				event.pos[0] - carta2.rect[0]>=0 and \
-				event.pos[0] - carta2.rect[0]<=58 and \
-				event.pos[1] - carta2.rect[1]>=0 and \
-				event.pos[1] - carta2.rect[1]<=84:
-
-				if event.rel[0] != 0:  # 'rel' is a tuple (x, y). 'rel[0]' is the x-value.
-					#print("You're moving the mouse to the right")
-					carta2.rect[0] +=  event.rel[0]
-
-				if event.rel[1] != 0:  # pygame start y=0 at the top of the display, so higher y-values are further down.
-					#print("You're moving the mouse down")
-					carta2.rect[1] +=  event.rel[1]
-
-			#Descola as cartas
-			if carta1.rect[0] == carta2.rect[0]:
-				carta1.rect[0] += 2
-				carta1.rect[1] += 2
-		
 		if event.type == pygame.MOUSEBUTTONDOWN:
-			if event.button == 3:
-				#print("You pressed the right mouse button")
-				if carta1.current_image==0:
-					carta1.current_image=1
-				else:
-					carta1.current_image=0
-
-				if carta2.current_image==0:
-					carta2.current_image=1
-				else:
-					carta2.current_image=0
+			for j in range(qty_cards):
+				if event.button == 3 and \
+					event.pos[0] - cartas[j].rect[0]>=0 and \
+					event.pos[0] - cartas[j].rect[0]<=58 and \
+					event.pos[1] - cartas[j].rect[1]>=0 and \
+					event.pos[1] - cartas[j].rect[1]<=84:
+					#print("You pressed the right mouse button")
+					if cartas[j].current_image==0:
+						cartas[j].current_image=1
+					else:
+						cartas[j].current_image=0
 
 		if event.type == pygame.MOUSEBUTTONUP:
-			print("You released the mouse button")
+			qt=0
+			for i in range(qty_cards):
+				if event.button==4 and \
+					event.pos[0] - cartas[i].rect[0]>=0 and \
+					event.pos[0] - cartas[i].rect[0]<=58 and \
+					event.pos[1] - cartas[i].rect[1]>=0 and \
+					event.pos[1] - cartas[i].rect[1]<=84:
+
+					qt=qt+1
+					if cartas[i].rect[0] < SCREEN_WIDTH-58 and cartas[i].rect[0] > 0:
+						cartas[i].rect[0] += qt
+					else:
+						if cartas[i].rect[0] <= 0 :
+							cartas[i].rect[0] = 2
+						else:
+							cartas[i].rect[0] = SCREEN_WIDTH-58-2
+
+				if event.button==5 and \
+					event.pos[0] - cartas[i].rect[0]>=0 and \
+					event.pos[0] - cartas[i].rect[0]<=58 and \
+					event.pos[1] - cartas[i].rect[1]>=0 and \
+					event.pos[1] - cartas[i].rect[1]<=84:
+
+					qt=qt+1
+					if cartas[i].rect[0] < SCREEN_WIDTH-58 and cartas[i].rect[0] > 0:
+						cartas[i].rect[0] -= qt
+					else:
+						if cartas[i].rect[0] <= 0 :
+							cartas[i].rect[0] = 2
+						else:
+							cartas[i].rect[0] = SCREEN_WIDTH+58+2
+
+
+					
 		
 	# A cada iteração de tela, coloca o fundo novamente
 	screen.blit(BACKGROUND,(0,0))
