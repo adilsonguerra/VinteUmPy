@@ -7,7 +7,7 @@ pygame.init()
 IMAGES_DIR = './resources/'
 SCREEN_WIDTH = 512#288
 SCREEN_HEIGHT = 512
-BACKGROUND = pygame.image.load(IMAGES_DIR + 'background-verde.png')
+BACKGROUND = pygame.image.load(IMAGES_DIR + 'background-branco.png')
 
 images_card= []
 images_card.append(pygame.image.load(IMAGES_DIR + 'verso_py.jpg'))
