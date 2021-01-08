@@ -10,7 +10,7 @@ SCREEN_HEIGHT = 512
 BACKGROUND = pygame.image.load(IMAGES_DIR + 'background-branco.png')
 
 images_card= []
-images_card.append(pygame.image.load(IMAGES_DIR + 'joker.jpg') )
+images_card.append(pygame.image.load(IMAGES_DIR + 'joker2.jpg') )
 #copas
 images_card.append(pygame.image.load(IMAGES_DIR + 'as_copas.jpg'))
 images_card.append(pygame.image.load(IMAGES_DIR + 'dois_copas.jpg'))
