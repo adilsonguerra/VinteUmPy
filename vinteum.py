@@ -7,10 +7,10 @@ pygame.init()
 IMAGES_DIR = './resources/'
 SCREEN_WIDTH = 512#288
 SCREEN_HEIGHT = 512
-BACKGROUND = pygame.image.load(IMAGES_DIR + 'background-verde.png')
+BACKGROUND = pygame.image.load(IMAGES_DIR + 'background-branco.png')
 
 images_card= []
-images_card.append(pygame.image.load(IMAGES_DIR + 'verso_py.jpg'))
+images_card.append(pygame.image.load(IMAGES_DIR + 'joker.jpg'))
 #copas
 images_card.append(pygame.image.load(IMAGES_DIR + 'as_copas.jpg'))
 images_card.append(pygame.image.load(IMAGES_DIR + 'dois_copas.jpg'))
@@ -114,7 +114,7 @@ class Baralho():
 	def __init__(self):
 		self.monte=[]
 		for i in range(53):
-			self.monte.append(Carta(images_card[i], images_card[0],1,1,100+i,100+i))
+			self.monte.append(Carta(images_card[i], pygame.image.load(IMAGES_DIR + 'verso_py.jpg'),1,1,100+i,100+i))
 		
 baralho = Baralho()
 
@@ -135,7 +135,7 @@ while True:
 	# Aqui no "FOR" definimos os eventos
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:  # Close your program if the user wants to quit.
-			pygame.quit() # OU raise SystemExit		
+			raise SystemExit	#  OU pygame.quit() # 	
 
 		#print(event)
 		if event.type == pygame.MOUSEMOTION:
