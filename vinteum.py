@@ -1,6 +1,18 @@
 import pygame
 from pygame.locals import *
 
+#--------------------------------------------------------
+'''
+self.image = pygame.transform.rotate(self.baseImage, -self.direction.angle)
+...
+self.imageW, self.imageH = self.image.get_size()
+...
+drawPosition = self.image.get_rect().move(self.position.x - self.imageW / 2, self.position.y - self.imageH / 2)
+self.screen.blit(self.image, drawPosition)
+'''
+#--------------------------------------------------------
+
+
 # Sempre tem que colocar logo no começo
 pygame.init()
 
@@ -87,6 +99,14 @@ class Carta(pygame.sprite.Sprite):
 
 		# o pássaro é composto por 4 images que vão se alternando, dando movimento.
 		# As imagens foram colocadas num array de imagens
+
+		#teste
+		'''
+		self.image_fr = pygame.transform.rotate(self.image_fr, -45)
+
+		drawPosition = self.image_fr.get_rect().move(self.position.x - 58 / 2, self.position.y - 84 / 2)
+		self.screen.blit(self.image_fr, drawPosition)
+		'''
 		self.images = [self.image_fr,self.image_vs]
 
 		self.current_image = 0
@@ -128,7 +148,10 @@ cartas = baralho.monte
 for i in range(len(cartas)):
 	carta_group.add(cartas[i])
 
-#Quantidade de cartas visíveis na mesa
+#carta_group.remove(cartas[0])
+#carta_group.add(cartas[0])
+
+#Quantidade de cartas manipuláveis na mesa
 qty_cards=53
 
 while True:
@@ -170,17 +193,30 @@ while True:
 		#---------------------------------------------------------------
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
+			
+			
 			for j in range(qty_cards):
+				
+				# Vira a carta
 				if event.button == 3 and \
 					event.pos[0] - cartas[j].rect[0]>=0 and \
 					event.pos[0] - cartas[j].rect[0]<=58 and \
 					event.pos[1] - cartas[j].rect[1]>=0 and \
 					event.pos[1] - cartas[j].rect[1]<=84:
-					#print("You pressed the right mouse button")
+
 					if cartas[j].current_image==0:
 						cartas[j].current_image=1
 					else:
 						cartas[j].current_image=0
+
+				#coloca no topo
+				if event.button == 1 and \
+					event.pos[0] - cartas[j].rect[0]>=0 and \
+					event.pos[0] - cartas[j].rect[0]<=58 and \
+					event.pos[1] - cartas[j].rect[1]>=0 and \
+					event.pos[1] - cartas[j].rect[1]<=84:
+					carta_group.remove(cartas[j])
+					carta_group.add(cartas[j])	
 
 		if event.type == pygame.MOUSEBUTTONUP:
 			qt=0
@@ -214,9 +250,7 @@ while True:
 							cartas[i].rect[0] = 2
 						else:
 							cartas[i].rect[0] = SCREEN_WIDTH+58+2
-
-
-					
+		
 		
 	# A cada iteração de tela, coloca o fundo novamente
 	screen.blit(BACKGROUND,(0,0))
